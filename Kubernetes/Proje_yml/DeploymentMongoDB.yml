@@ -1,0 +1,34 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: deployment-mongodb
+spec:
+  selector:
+    matchLabels:
+      app: deployment-pod-label-mongodb
+  template:
+    metadata:
+      labels:
+        app: deployment-pod-label-mongodb      
+    spec:
+      containers: 
+      - name: mongodb 
+        image: mongo
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "1024Mi"
+          limits:
+            cpu: "500m"
+            memory: "2048Mi"
+        ports: 
+        - containerPort: 27017
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: BilgeAdmin
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: Bilge**!!
+        
+
+        
+

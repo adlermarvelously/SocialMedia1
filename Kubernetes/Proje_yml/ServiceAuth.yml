@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-auth-export-ip
+spec:
+  selector:
+    app: deployment-pod-label-auth 
+  type: LoadBalancer
+  ports:
+    - name:  authport
+      port: 9090
+      targetPort: 9090

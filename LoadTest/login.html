@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <label for="txtusername">Username</label> <br><br>
+    <input type="text" id="txtusername"/> <br><br>
+    <label for="txtusername">Password</label> <br><br>
+    <input type="password" id="txtpassword"/> <br><br>
+
+    <button type="button" id="btnlogin" onclick="login()">Login</button>
+
+    <script >
+        function login(){
+            var username = document.getElementById("txtusername").value;
+            var password = document.getElementById("txtpassword").value;
+
+            fetch('http://localhost/auth/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username : username,
+                    password : password
+                })
+            }).then(res => res.json())
+                .then(data=>{
+                    alert(data.result)
+                })
+        }
+    </script>
+
+</body>
+</html>

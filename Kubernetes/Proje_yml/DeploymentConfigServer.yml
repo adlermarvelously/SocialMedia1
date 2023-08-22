@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: deployment-config
+spec:
+  selector:
+    matchLabels:
+      app: deployment-pod-label-config
+  template:
+    metadata:
+      labels:
+        app: deployment-pod-label-config      
+    spec:
+      containers: 
+      - name: config 
+        image: javaboost2/java8configservergit:v01
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "1024Mi"
+          limits:
+            cpu: "500m"
+            memory: "2048Mi"
+        ports: 
+        - containerPort: 8888
+        env:
+          - name: GIT_PASSWORD
+            value: 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
+
+        
+
+        
+

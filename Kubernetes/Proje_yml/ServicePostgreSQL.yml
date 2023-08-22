@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-postgre-export-ip
+spec:
+  # servis objeleri, bir network ağ yapısı şeklindedirler. bu yüzden kendilerinde
+  # bağlanacak bileşenlere ağ trafiğini yönlendirirler. Bu nedenle podların
+  # otomatik olarak bu ağa bağlanmasını sağlamak için selector ile label ları
+  # tanımlamak gereklidir.
+  selector:
+    app: deployment-pod-label-postgresql
+  # Servis objeleri 3 şekilde tanımlanır ve kullanılır;
+  # NodePort: nodlar arası erişimi açmak için
+  # ClusterIP: aynı node içinde podların sabit bir network üzerinden haberleşmesi için
+  # LoadBalancer: iç ağı dışarıya internete açmak için kullanılır.
+  type: ClusterIP
+  # podların iletişime açılacağı portları ve dış dünyaya açımak istenilen
+  # portları belirtiyoruz.
+  ports:
+    - name:  postgreport
+      port: 5432
+      targetPort: 5432

@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: deployment-auth
+spec:
+  selector:
+    matchLabels:
+      app: deployment-pod-label-auth
+  template:
+    metadata:
+      labels:
+        app: deployment-pod-label-auth      
+    spec:
+      containers: 
+      - name: auth 
+        image: javaboost2/java8authservice:v01
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "1024Mi"
+          limits:
+            cpu: "500m"
+            memory: "2048Mi"
+        ports: 
+        - containerPort: 9090
+        env:
+          - name: CONFIG_SERVER_URL
+            value: http://192.168.131.69:8888
+
+        
+
+        
+
